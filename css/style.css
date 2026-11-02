@@ -1,161 +1,96 @@
-
-#skills .core-skill strong {
-  display: block;
-  margin: 0 0 14px !important;
-  font-size: 16px !important;
-  line-height: 1.45 !important;
-  overflow-wrap: anywhere;
+:root {
+  --bg: #f4e9e7;
+  --panel: #fff9f5;
+  --panel2: #ead3d3;
+  --text: #4b2932;
+  --muted: #896d74;
+  --sage: #7d2638;
+  --blue: #b76b72;
+  --blue-soft: #f1dadd;
+  --cream: #f8eee6;
+  --border: rgba(125,38,56,.16);
+  --shadow: 0 15px 40px rgba(75,29,43,.12);
 }
-#skills .core-skill span {
-  display: block;
-  margin: 0 !important;
-  font-size: 13px !important;
-  line-height: 1.65 !important;
-  overflow-wrap: anywhere;
-}
-#skills .core-skill .work-tools {
-  display: block;
-  margin-top: auto !important;
-  padding-top: 16px !important;
-  font-size: 11px !important;
-  line-height: 1.5 !important;
-  overflow-wrap: anywhere;
-}
-#skills .capability-controls {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 14px !important;
-  width: 100% !important;
-  margin: 8px auto 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-}
-#skills .capability-hint { text-align: center !important; }
-#skills .capability-controls .capability-arrow { flex: 0 0 30px; }
-@media (max-width: 900px) {
-  #skills .core-skills { max-width: 760px !important; padding: 18px !important; }
-  #skills .core-skill-grid {
-    --cap-card-width: 340px;
-    --cap-overlap: 52px;
-  }
-  #skills .core-skill { min-height: 300px !important; }
-}
-@media (max-width: 600px) {
-  #skills .core-skills {
-    width: 100% !important;
-    padding: 15px !important;
-    border-radius: 16px;
-  }
-  #skills .core-skill-grid {
-    --cap-card-width: 82vw;
-    --cap-overlap: 42px;
-    padding: 14px 8px 20px !important;
-  }
-  #skills .core-skill {
-    min-height: 285px !important;
-    padding: 19px !important;
-    border-radius: 16px;
-  }
-  #skills .core-skill strong { font-size: 14px !important; }
-  #skills .core-skill span { font-size: 12px !important; line-height: 1.6 !important; }
-  #skills .core-skill .work-tools { font-size: 10px !important; }
-  #skills .capability-controls { gap: 9px !important; }
-  #skills .capability-hint { font-size: 11px; }
+body.dark {
+  --bg: #1c1118;
+  --panel: #2b1b24;
+  --panel2: #402630;
+  --text: #f8e9eb;
+  --muted: #d0adb4;
+  --sage: #e7a2ac;
+  --blue: #d28b96;
+  --blue-soft: #4c2d39;
+  --cream: #3a2630;
+  --border: rgba(248,220,226,.16);
+  --shadow: 0 15px 40px rgba(0,0,0,.22);
 }
 
-
-/* Section 03 navigation fix: allow every card, including the first and last, to center */
-#skills .core-skill-grid {
-  --cap-card-width: 390px;
-  --cap-overlap: 62px;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  scroll-padding-inline: 0;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background .35s, color .35s;
+  overflow-x: hidden;
 }
-#skills .core-skill-grid::before,
-#skills .core-skill-grid::after {
-  content: "";
-  display: block;
-  flex: 0 0 max(0px, calc((100% - var(--cap-card-width)) / 2));
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+.container { width: min(1120px, 91%); margin: auto; }
+section { padding: 65px 0; }
+img { width: 100%; height: 100%; object-fit: cover; }
+
+h1, h2, h3, h4, .brand {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  letter-spacing: -1.5px;
 }
-#skills .core-skill {
-  margin-left: calc(-1 * var(--cap-overlap)) !important;
+.eyebrow {
+  color: var(--sage);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
-#skills .core-skill:first-child { margin-left: 0 !important; }
-@media (max-width: 900px) {
-  #skills .core-skill-grid { --cap-card-width: 340px; --cap-overlap: 52px; }
+.heading {
+  font-size: clamp(30px, 4vw, 46px);
+  letter-spacing: -2px;
+  line-height: 1.12;
+  margin: 12px 0;
 }
-@media (max-width: 600px) {
-  #skills .core-skill-grid { --cap-card-width: 82vw; --cap-overlap: 42px; }
+.heading span { color: var(--sage); }
+.muted {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 12px;
 }
-
-/* =========================================================
-   SECTION 03 — RESPONSIVE CARD WIDTH FIX
-   Keeps the existing overlapping-card design and navigation,
-   but calculates card width from the actual available panel.
-   This supports phones, tablets, and laptop split-screen.
-   ========================================================= */
-
-#skills .core-skills {
-  container-type: inline-size;
-  min-width: 0;
-  max-width: 100%;
-  box-sizing: border-box;
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s ease, transform .7s ease;
 }
+.reveal.show { opacity: 1; transform: translateY(0); }
 
-#skills .core-skill-grid {
-  --cap-card-width: min(390px, calc(100% - 32px));
-  --cap-overlap: clamp(18px, 6cqi, 62px);
-  min-width: 0;
-  max-width: 100%;
-  box-sizing: border-box;
-  scroll-padding-inline: 0;
+/* NAVIGATION */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
 }
-
-#skills .core-skill-grid::before,
-#skills .core-skill-grid::after {
-  flex: 0 0 max(0px, calc((100% - var(--cap-card-width)) / 2));
+.nav-inner {
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-#skills .core-skill {
-  flex: 0 0 var(--cap-card-width) !important;
-  width: var(--cap-card-width) !important;
-  max-width: var(--cap-card-width) !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-  overflow-wrap: anywhere;
+.brand {
+  font-size: 22px;
+  letter-spacing: -1.5px;
 }
-
-@media (max-width: 900px) {
-  #skills .core-skill-grid {
-    --cap-card-width: min(340px, calc(100% - 28px));
-    --cap-overlap: clamp(18px, 5.5cqi, 50px);
-  }
-}
-
-@media (max-width: 600px) {
-  #skills .core-skill-grid {
-    --cap-card-width: min(82vw, calc(100% - 16px));
-    --cap-overlap: clamp(16px, 5cqi, 40px);
-  }
-}
-
-@media (max-width: 380px) {
-  #skills .core-skills {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  #skills .core-skill-grid {
-    --cap-card-width: calc(100% - 12px);
-    --cap-overlap: 16px;
-  }
-
-  #skills .core-skill {
-    padding: 16px !important;
-  }
-
-  #skills .capability-controls {
-    gap: 6px !important;
-  }
+.brand span { color: var(--blue); }
+.nav-links { display: flex; gap: 25px; }
+.nav-links a {
+  font-size: 11px;
